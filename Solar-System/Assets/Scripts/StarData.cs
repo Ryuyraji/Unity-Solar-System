@@ -15,7 +15,7 @@ public class StarData : CsvData
     {
         Hip=int.Parse(data[0]);//문자열->int형으로 바꾸기
         RightAscension = RightAscensionToDegree(int.Parse(data[1]),int.Parse(data[2]),float.Parse(data[3]));
-        Declination = DeclinationToDegree(int.Parse(data[4]), int.Parse(data[5]), int.Parse(data[6]));
+        Declination = DeclinationToDegree(int.Parse(data[4]), int.Parse(data[5]), float.Parse(data[6]));
         ApparentMagnitude=float.Parse(data[7]);
         ColorType = data[13].Substring(0,1);
     }
