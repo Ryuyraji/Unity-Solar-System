@@ -121,7 +121,7 @@ public class DrawConstellation : MonoBehaviour
         child.transform.localPosition=new Vector3(0.0f,0.0f,SpaceSize);
 
         var textMesh=child.GetComponent<TextMesh>();
-        textMesh.text = string.Format("{0}ÁÂ", nameData.KoreanName);
+        textMesh.text = string.Format("{0}ÀÚ¸®", nameData.KoreanName);
         return text;
     }
 }
