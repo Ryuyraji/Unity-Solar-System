@@ -37,6 +37,12 @@ public class StarLineController : MonoBehaviour
         {
             HideConstellationObj();
         }
+
+        // SPACE BAR로 별자리 Show/Hide 기능 추가
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            lineSwitch = !lineSwitch;
+        }
     }
 
 
