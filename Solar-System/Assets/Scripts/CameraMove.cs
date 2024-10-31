@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -65,10 +65,16 @@ public class CameraController : MonoBehaviour
     private void CameraInput()
     {
         Vector3 p_Velocity = new Vector3();
-        if (Input.GetKey(KeyCode.W))
+        // 유니티 씬뷰와 동일하게 입력키 이동 변경
+        // Q/E : 현 시점 아래/위     W/S : 현 시점 앞/뒤    A/D : 현 시점 좌/우
+        if (Input.GetKey(KeyCode.E))
             p_Velocity += new Vector3(0, 1f, 0);
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.Q))
             p_Velocity += new Vector3(0, -1f, 0);
+        if (Input.GetKey(KeyCode.W))
+            transform.position += transform.forward * _zoomSpeed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.S))
+            transform.position -= transform.forward * _zoomSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.Alpha1))
             p_Velocity += new Vector3(0, 0, 1f);
         if (Input.GetKey(KeyCode.Alpha2))
