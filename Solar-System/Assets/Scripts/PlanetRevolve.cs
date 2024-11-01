@@ -11,7 +11,7 @@ public class PlanetRevolve : MonoBehaviour
     [SerializeField]
     public float eccentricity = 0.0167f;        // 편심
     [SerializeField]
-    float majorAxisRound = 10.0f;               // 장축 반지름 (x축)
+    float majorAxisRound;                       // 장축 반지름 (x축)
     float minorAxisRound;                       // 단축 반지름 (z축)
     float angle = 0;                            // 현재 각도
     
@@ -19,6 +19,9 @@ public class PlanetRevolve : MonoBehaviour
     {
         // 중심 오브젝트 (항성) 지정 -> 태양계 : 태양
         fixedStar = GameObject.Find("Sun");
+
+        // 장축 반지름은 Object transform.x좌표로 설정
+        majorAxisRound = this.transform.position.x;
 
         // 유니티 환경과 실제 환경이 다르게 설정되어 있으므로 편심을 기준으로 장축 반지름, 단축반지름을 설정.
         // 편심 값을 고정으로, 비율에 따라 Inspector에서 장축 반지름을 세팅
