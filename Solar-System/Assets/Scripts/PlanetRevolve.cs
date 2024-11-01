@@ -7,17 +7,25 @@ public class PlanetRevolve : MonoBehaviour
     [SerializeField]
     GameObject fixedStar;
     [SerializeField]
-    float revolutionSpeed = 0.5f;        // 공전속도
+    float revolutionSpeed = 0.5f;               // 공전속도
     [SerializeField]
-    float majorAxisRound = 10.0f;       // 장축 반지름 (x축)
+    public float eccentricity = 0.0167f;        // 편심
     [SerializeField]
-    float minorAxisRound = 9.0f;        // 단축 반지름 (z축)
-    float angle = 0.0f;                 // 현재 각도
+    float majorAxisRound = 10.0f;               // 장축 반지름 (x축)
+    [SerializeField]
+    float minorAxisRound;                       // 단축 반지름 (z축)
+    [SerializeField]
+    float angle = 0;                            // 현재 각도
     
     void Start()
     {
         // 중심 오브젝트 (항성) 지정 -> 태양계 : 태양
         fixedStar = GameObject.Find("Sun");
+
+        // 유니티 환경과 실제 환경이 다르게 설정되어 있으므로 편심을 기준으로 장축 반지름, 단축반지름을 설정.
+        // 편심 값을 고정으로, 비율에 따라 Inspector에서 장축 반지름을 세팅
+        // 단축 반지름은 편심을 기준으로 자동 계산하여 세팅
+        minorAxisRound = majorAxisRound * Mathf.Sqrt(1 - eccentricity * eccentricity);
     }
 
     void Update()
@@ -26,17 +34,19 @@ public class PlanetRevolve : MonoBehaviour
         //transform.RotateAround(fixedStar.transform.position, Vector3.up, revolutionSpeed * Time.deltaTime);
 
         // 각도 변환
+        // 매 프레임마다 일정하게 증가 -> 행성이 궤도를 따라 일정하게 이동
         angle += revolutionSpeed * Time.deltaTime;
 
-        // x, z좌표 타원 방정식 계산
-        float x = majorAxisRound * Mathf.Cos(angle);
-        float z = minorAxisRound * Mathf.Sin(angle);
+        // 중력에 의해 타원 궤도의 중심이 항상 한 초점을 향하도록 계산
+        // 타원의 중심 ~ 초점까지의 거리 = 편심 * 장축 반지름
+        float offsetX = eccentricity * majorAxisRound;
+        
+        // 각도를 기준으로 타원 상 위치 계산 (타원 방정식)
+        float x = Mathf.Cos(angle) * majorAxisRound;
+        float z = Mathf.Sin(angle) * minorAxisRound;
 
-        // 타원 궤도 위치로 이동
-        transform.position = new Vector3(x, 0, z) + fixedStar.transform.position;
-
-        // 오일러 각도 회전으로 타원 궤도 설정
-        Vector3 currnetDirection = fixedStar.transform.position - transform.position;       // 항성 중심 회전
-        transform.eulerAngles = new Vector3(0, Mathf.Atan2(currnetDirection.x, currnetDirection.z) * Mathf.Rad2Deg, 0);
+        // 타원 궤도 공전 (한 초점을 기준으로 설정)
+        Vector3 orbitPosition = new Vector3(x - offsetX, 0, z);
+        transform.position = fixedStar.transform.position + orbitPosition;
     }
 }
