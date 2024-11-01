@@ -12,9 +12,7 @@ public class PlanetRevolve : MonoBehaviour
     public float eccentricity = 0.0167f;        // 편심
     [SerializeField]
     float majorAxisRound = 10.0f;               // 장축 반지름 (x축)
-    [SerializeField]
     float minorAxisRound;                       // 단축 반지름 (z축)
-    [SerializeField]
     float angle = 0;                            // 현재 각도
     
     void Start()
@@ -36,6 +34,9 @@ public class PlanetRevolve : MonoBehaviour
         // 각도 변환
         // 매 프레임마다 일정하게 증가 -> 행성이 궤도를 따라 일정하게 이동
         angle += revolutionSpeed * Time.deltaTime;
+
+        // angle 범위 바운더리 설정 (2π 이내로)
+        if (angle > Mathf.PI * 2) angle -= Mathf.PI * 2;
 
         // 중력에 의해 타원 궤도의 중심이 항상 한 초점을 향하도록 계산
         // 타원의 중심 ~ 초점까지의 거리 = 편심 * 장축 반지름
