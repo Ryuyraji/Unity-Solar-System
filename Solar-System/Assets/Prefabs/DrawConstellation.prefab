@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0e92dc58234ff40a8f417c989a03e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpaceSize: 3000
+  SpaceSize: 2500
   starPrefab: {fileID: 3224381362517048095, guid: 50b57b5b0cb132342b8c0f7da5055722,
     type: 3}
   linePrefab: {fileID: 9178372890069237943, guid: 56e994afc96a7ae478e9668353671222,

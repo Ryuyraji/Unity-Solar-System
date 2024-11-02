@@ -2,6 +2,7 @@
 
 public class CameraController : MonoBehaviour
 {
+    // 카메라 이동
     [SerializeField]
     float _zoomSpeed = 300f;
     [SerializeField]
@@ -16,12 +17,28 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     float _inputSpeed = 20f;
 
-    private void LateUpdate()
+    // 카메라 이동 제한
+    [SerializeField]
+    float radius;
+    [SerializeField]
+    GameObject _DrawConstellation;
+
+    void Start()
+    {
+        // 카메라 이동 범위 -> 별자리 구 안쪽으로 세팅
+        radius = _DrawConstellation.GetComponent<DrawConstellation>().SpaceSize;
+        radius -= 100.0f;
+
+    }
+    
+    void LateUpdate()
     {
         CameraZoom();
         CameraDrag();
         CameraRotate();
         CameraInput();
+
+        CameraBoundary();
     }
 
     void CameraRotate()
@@ -62,7 +79,7 @@ public class CameraController : MonoBehaviour
     }
 
     float totalRun = 1.0f;
-    private void CameraInput()
+    void CameraInput()
     {
         Vector3 p_Velocity = new Vector3();
         // 유니티 씬뷰와 동일하게 입력키 이동 변경
@@ -95,6 +112,17 @@ public class CameraController : MonoBehaviour
             p.z = Mathf.Clamp(p.z, -_inputSpeed, _inputSpeed);
 
             transform.Translate(p);
+        }
+    }
+
+    void CameraBoundary()
+    {
+        Vector3 offset = transform.position - Vector3.zero;
+        if (offset.magnitude > radius)
+        {
+            // 반경을 초과할 경우 반경 안쪽으로 위치 고정
+            offset = offset.normalized * radius;
+            transform.position = Vector3.zero + offset;
         }
     }
 }

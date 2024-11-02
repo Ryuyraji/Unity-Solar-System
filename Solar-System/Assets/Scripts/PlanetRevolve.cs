@@ -10,7 +10,7 @@ public class PlanetRevolve : MonoBehaviour
     float revolutionSpeed = 0.5f;               // 공전속도
     [SerializeField]
     public float eccentricity = 0.0167f;        // 편심
-    [SerializeField]
+
     float majorAxisRound;                       // 장축 반지름 (x축)
     float minorAxisRound;                       // 단축 반지름 (z축)
     float angle = 0;                            // 현재 각도
