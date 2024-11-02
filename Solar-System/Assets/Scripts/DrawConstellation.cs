@@ -4,7 +4,8 @@ using UnityEngine.UIElements;
 
 public class DrawConstellation : MonoBehaviour
 {
-    static float SpaceSize = 1500.0f;
+   [SerializeField]
+    float SpaceSize = 1500.0f;
     static float StarBaseSize = 8.0f;
     [SerializeField]
     GameObject starPrefab;
