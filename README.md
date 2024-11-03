@@ -1,7 +1,9 @@
 # Unity-Solar-System
 🌌 Create a solar system in Unity! <br><br>
 Blog : [유니티로 태양계를 구현해보았다!](https://velog.io/@xaesu/Unity-%ED%83%9C%EC%96%91%EA%B3%84-%EA%B5%AC%ED%98%84) <br>
-Youtube : [시연영상 👉 Short ver.](https://www.youtube.com/shorts/H-_yuv3iotg)
+Youtube : [시연영상 👉 Short ver.](https://www.youtube.com/shorts/H-_yuv3iotg) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[시연영상 👉 Long ver.](https://youtu.be/92ZUawsGHTE)
 
 <br>
 
